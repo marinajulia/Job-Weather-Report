@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZLiqs2Vefw5abOz+BDmEZ+zskGez9EGmSrRs9sgGJrEc4d/a+jEWoREtGIZ5fuFKwTD8r3Z4LyQQ5miDqzT6Qw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Marina\\OneDrive\\Área de Trabalho\\Job\\Job-Weather-Report\\Job-Weather-Report.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Marina\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Marina\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Marina\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Marina\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Marina\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Marina\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
