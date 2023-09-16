@@ -1,3 +1,8 @@
+using Hangfire;
+using Hangfire.MemoryStorage;
+using Job_Weather_Report.Interfaces.User;
+using Job_Weather_Report.Interfaces.WeatherREport;
+using Job_Weather_Report.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,44 +21,26 @@ namespace Job_Weather_Report
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
+        private static IUserService _userService;
+        private static IWeatherReportService _weatherReportService;
+        private readonly Job jobscheduler = new Job(_userService, _weatherReportService);
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Resolve();
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddHangfire(op =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Job_Weather_Report", Version = "v1" });
+                op.UseMemoryStorage();
             });
+            services.AddHangfireServer();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Job_Weather_Report v1"));
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseHangfireDashboard();
+            RecurringJob.AddOrUpdate(() => jobscheduler.Execute(), Cron.Daily);
         }
     }
 }

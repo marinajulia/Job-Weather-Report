@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Infra\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Hangfire" Version="1.8.5" />
     <PackageReference Include="Hangfire.MemoryStorage" Version="1.8.0" />
