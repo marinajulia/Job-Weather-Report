@@ -3,6 +3,8 @@ using Job_Weather_Report.Interfaces.WeatherREport;
 using Job_Weather_Report_Infra.Infra.Entities;
 using System.Threading.Tasks;
 using System;
+using ConfigCat.Client;
+using Job_Weather_Report.Interfaces.Configcat;
 
 namespace Job_Weather_Report
 {
@@ -10,13 +12,21 @@ namespace Job_Weather_Report
     {
         private readonly IUserService _userService;
         private readonly IWeatherReportService _weatherReportService;
-        public Job(IUserService userService, IWeatherReportService weatherReportService)
+        private readonly IConfigcatService _configcatService;
+        public Job(IUserService userService, IWeatherReportService weatherReportService, IConfigcatService configcatService)
         {
             _userService = userService;
             _weatherReportService = weatherReportService;
+            _configcatService = configcatService;
         }
         public Task Execute()
         {
+            if (!_configcatService.AuthorizeExecution())
+            {
+                //colocar log que esta desativado
+                return Task.CompletedTask;
+            }
+
             var userEntities = _userService.Get();
             foreach (var user in userEntities)
             {

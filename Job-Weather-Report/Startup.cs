@@ -1,5 +1,6 @@
 using Hangfire;
 using Hangfire.MemoryStorage;
+using Job_Weather_Report.Interfaces.Configcat;
 using Job_Weather_Report.Interfaces.User;
 using Job_Weather_Report.Interfaces.WeatherREport;
 using Job_Weather_Report.IoC;
@@ -23,7 +24,8 @@ namespace Job_Weather_Report
     {
         private static IUserService _userService;
         private static IWeatherReportService _weatherReportService;
-        private readonly Job jobscheduler = new Job(_userService, _weatherReportService);
+        private static IConfigcatService _configcatService;
+        private readonly Job jobscheduler = new Job(_userService, _weatherReportService, _configcatService);
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
